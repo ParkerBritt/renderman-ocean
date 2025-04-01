@@ -3,7 +3,7 @@ import prman
 
 
 ri = prman.Ri()
-ri.Begin("out.rib")
+ri.Begin("../../build/out.rib")
 ri.Option("searchpath", {"string texture": "./textures/:@"})
 
 ri.Display("rgb.exr", "it", "rgba")
@@ -21,8 +21,7 @@ ri.AttributeBegin()
 ri.Bxdf("PxrSurface", "MTL_ball", { })
 ri.Translate(0, 0, 0)
 # ri.Sphere(0.5, -1, 1, 360)
-program = 'Procedural "RunProgram" ["procedural" ""] [-5 5 -5 5 -5 5]\n'
-# program = 'Procedural "RunProgram" ["procedural.sh" ""] [-5 5 -5 5 -5 5]\n'
+program = 'Procedural "RunProgram" ["build/bin/procedural" ""] [-5 5 -5 5 -5 5]\n'
 ri.ArchiveRecord(ri.VERBATIM, program)
 # ri.Patch("bilinear", {"P": [0.5, 0.0, 0.5, 0.5, 0.0, -0.5, -0.5, 0.0, 0.5, -0.5, 0.0, -0.5]})
 
