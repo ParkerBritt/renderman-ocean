@@ -12,16 +12,17 @@ ri.Projection(ri.PERSPECTIVE, {ri.FOV: 40})
 
 ri.Integrator("PxrPathTracer", "integrator")
 
-ri.Rotate(-12, 1, 0, 0)
-ri.Translate(0, -0.5, 2.5)
+ri.Rotate(-20, 1, 0, 0)
+ri.Translate(0, -3, 10)
+# ri.Rotate(-90, 0, 1, 0)
 ri.WorldBegin()
 
 ri.TransformBegin()
 ri.AttributeBegin()
 ri.Bxdf("PxrSurface", "MTL_ball", { })
 ri.Translate(0, 0, 0)
-# ri.Sphere(0.5, -1, 1, 360)
-program = 'Procedural "RunProgram" ["build/bin/procedural" ""] [-5 5 -5 5 -5 5]\n'
+ri.Sphere(0.5, -1, 1, 360)
+program = 'Procedural "RunProgram" ["bin/procedural" ""] [-5 5 -5 5 -5 5]\n'
 ri.ArchiveRecord(ri.VERBATIM, program)
 # ri.Patch("bilinear", {"P": [0.5, 0.0, 0.5, 0.5, 0.0, -0.5, -0.5, 0.0, 0.5, -0.5, 0.0, -0.5]})
 
