@@ -1,0 +1,21 @@
+shader water (
+                float scale=1,
+                float height=1,
+                output	color outDiffuse=0,
+                output float outDisplacement=0
+            )
+{
+ 
+
+    outDisplacement=0;
+
+    for (int i = 0;  i < 3;  ++i) {
+        float localScale = scale/i;
+        outDisplacement+=(sin(v/localScale)+sin(u/localScale))/i;
+    }
+
+    outDisplacement*=height;
+    outDiffuse=color(0,0.2,0.3);
+
+
+}
