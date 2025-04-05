@@ -1,1 +1,1 @@
-Source code for generating RIB ocean generation.
+Source code for generating RIB ocean.
