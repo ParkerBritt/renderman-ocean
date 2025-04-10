@@ -6,4 +6,4 @@
   <a href="https://github.com/AcademySoftwareFoundation/OpenShadingLanguage"><img src="https://parkerbritt.com/badge?label=OSL&color=008ED2"></a>
 </div>
 
-Source code for generating RIB ocean.
+Source code for generating RIB (RenderMan Interface Bytestream) ocean.
