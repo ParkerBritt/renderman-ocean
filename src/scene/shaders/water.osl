@@ -11,7 +11,7 @@ shader water (
             )
 {
  
-    int waveNum = 10;
+    int waveNum = 20;
     int waveDirNum = 6;
 
     float c = 1;
@@ -22,7 +22,7 @@ shader water (
     float y = 0;
 
     float baseWaveLength = 3;
-    float baseAmp = 0.015;
+    float baseAmp = 0.01;
 
     float offsetForEachDir = 20.8;
 
