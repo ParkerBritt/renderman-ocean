@@ -34,7 +34,8 @@ ri.Displace(
     "water_displace", # name
     { # parameters
         "uniform float dispAmount": [1],
-        "reference float dispScalar": ["waterShader:outDisplacement"]
+        # "reference float dispScalar": ["waterShader:outDisplacement"],
+        "reference vector dispVector": ["waterShader:outDisplacement"],
     },
 )
 

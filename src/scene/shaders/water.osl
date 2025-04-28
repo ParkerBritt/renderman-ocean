@@ -2,23 +2,22 @@ shader water (
                 float scale=1,
                 float height=1,
                 output	color outDiffuse=0,
-                output float outDisplacement=0
+                output vector outDisplacement= vector(0,1,0)
             )
 {
  
 
-    outDisplacement=0;
 
     float amp = height;
     float frequency = scale;
     float offset = 0;
-    for (int i = 0;  i < 15;  ++i) {
-        for(int j = 0; j < 2; ++j){
+    for (int i = 0;  i < 1;  ++i) {
+        for(int j = 0; j < 1; ++j){
             float angle = noise("hash", j);
             angle *= 2.0 * M_PI;
             vector dir = vector(cos(angle),0, sin(angle));
+            outDisplacement.y += sin(dot(P, dir)*frequency+offset)*amp;
 
-            outDisplacement += sin(dot(P, dir)*frequency+offset)*amp;
         }
         amp *= 0.5;
         frequency *= 1.5;
