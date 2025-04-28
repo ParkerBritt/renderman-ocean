@@ -1,3 +1,8 @@
+float fit(float value, float oldmin, float oldmax, float newmin, float newmax)
+{
+    return newmin + (value - oldmin) * (newmax - newmin) / (oldmax - oldmin);
+}
+
 shader water (
                 float scale=1,
                 float height=1,
@@ -6,26 +11,59 @@ shader water (
             )
 {
  
+    int waveNum = 10;
+    int waveDirNum = 6;
+
+    float c = 1;
+    float t = 0 * c;
+
+
+    float x = 0;
+    float y = 0;
+
+    float baseWaveLength = 3;
+    float baseAmp = 0.015;
+
+    float offsetForEachDir = 20.8;
+
+    float offset = 17.2;
 
 
     float amp = height;
     float frequency = scale;
-    float offset = 0;
-    for (int i = 0;  i < 1;  ++i) {
-        for(int j = 0; j < 1; ++j){
-            float angle = noise("hash", j);
-            angle *= 2.0 * M_PI;
-            vector dir = vector(cos(angle),0, sin(angle));
-            outDisplacement.y += sin(dot(P, dir)*frequency+offset)*amp;
+    for (int i = 0;  i < waveDirNum;  ++i) {
+        float angle = noise("hash", i);
+        angle *= 2.0 * M_PI;
+        vector dir = vector(cos(angle),0, sin(angle));
 
+        float dirOffset = 20;
+        float offset = noise("hash", i+6072) * dirOffset;
+
+        float a = dot(P, dir);
+            
+
+        for(int j = 0; j < waveNum; ++j){
+            float waveLength = baseWaveLength / (j + 1) * fit(noise("hash", i+10),0,1,0.5,1.5);
+            float amplitude = baseAmp / (j + 1) * fit(noise("hash", i+5),0,1,0.2,2);
+            offset += noise("hash", j+826) * offset;
+
+
+            float k = 2 * M_PI / waveLength;
+            float theta = k * a + t + offset;
+
+            x = amplitude * sin(theta);
+            y -= amplitude * cos(theta);
+            outDisplacement += x*dir;
         }
-        amp *= 0.5;
-        frequency *= 1.5;
-            offset += 1;
     }
 
 
+
+
+    outDisplacement.y = y;
+
     outDiffuse=color(0,0.2,0.3);
+
 
 
 }

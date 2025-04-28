@@ -47,7 +47,7 @@ ri.Bxdf('PxrSurface', 'id',
 	'float diffuseRoughness' : [0.0],
 
 	'color specularFaceColor' : [0.1, 0.11, 0.12],
-	'float specularRoughness' : [0.0],
+	'float specularRoughness' : [0.05],
 
  #    'float refractionGain' : [1.0], 
 	# 'color refractionColor' : [0,0.4,0.5], 
