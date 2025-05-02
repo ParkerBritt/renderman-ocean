@@ -7,3 +7,4 @@
 </div>
 
 This Python tool generates RIB (RenderMan Interface Bytestream) files and includes a custom OSL shader for rendering realistic ocean surfaces.
+Using a custom implementation of trochoidal waves
