@@ -21,7 +21,7 @@ shader water (
     float x = 0;
     float y = 0;
 
-    float baseWaveLength = 3;
+    float baseWaveLength = 2;
     float baseAmp = 0.005;
 
     float offsetForEachDir = 20.8;

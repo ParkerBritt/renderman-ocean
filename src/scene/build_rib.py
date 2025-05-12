@@ -24,7 +24,7 @@ ri.Translate(0, 0, 0)
 
 ## shader begin
 
-ri.Pattern("water", "waterShader", {"float scale": [0.5], "float height":[0.05]})
+ri.Pattern("water", "waterShader", {"float height":[0.05]})
 
 # displacement
 ri.Attribute("trace", {"int displacements": [1]})
