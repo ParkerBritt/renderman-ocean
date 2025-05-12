@@ -7,8 +7,16 @@ ri.Begin("../../build/out.rib")
 ri.Option("searchpath", {"string texture": "./textures/:@"})
 
 ri.Display("rgb.exr", "it", "rgba")
-# ri.Format(1920, 1080, 1)
-ri.Format(720,480, 1)
+ri.Display("+rgb.exr", "openexr", "rgba")
+
+ri.DisplayChannel("float z")
+
+ri.Display("+zdepth.exr", "openexr", "z", {
+    "string filter": "zmin",
+    "string data": "z"
+})
+image_scale = 1
+ri.Format(1920*image_scale, 1080*image_scale, 1)
 ri.Projection(ri.PERSPECTIVE, {ri.FOV: 40})
 
 ri.Integrator("PxrPathTracer", "integrator")
@@ -17,12 +25,6 @@ ri.Rotate(-10, 1, 0, 0)
 ri.Translate(0, -3, 10)
 # ri.Rotate(-90, 0, 1, 0)
 
-ri.DisplayChannel("float z")
-
-ri.Display("zdepth.exr", "openexr", "z", {
-    "string filter": "zmin",
-    "string data": "z"
-})
 
 ri.WorldBegin()
 
@@ -48,7 +50,7 @@ ri.Displace(
 )
 
 ri.Attribute("visibility", {"int transmission": [1]})
-ri.Bxdf('PxrSurface', 'id',
+ri.Bxdf('PxrSurface', 'waterSurface',
 {
 	# 'color diffuseColor' : [0.286, 0.353, 0.337],
     "reference color diffuseColor": ["waterShader:outDiffuse"],
@@ -76,9 +78,43 @@ ri.Bxdf('PxrSurface', 'id',
 patch_size = 500
 ri.Patch("bilinear", {"P": [0.5*patch_size, 0.0, 0.5*patch_size, 0.5*patch_size, 0.0, -0.5*patch_size, -0.5*patch_size, 0.0, 0.5*patch_size, -0.5*patch_size, 0.0, -0.5*patch_size]})
 
+# buoy
+ri.TransformBegin()
+ri.Bxdf('PxrSurface', 'buoy_surface',
+{
+    'color diffuseColor' : [0.965, 0.576, 0.141],
+})
+ri.Displace(
+    "PxrDisplace",
+    "nodisplace",
+)
+
+
+ri.TransformBegin()
+
+# position
+ri.Translate(7,0,25)
+
+# wobbly rotation
+ri.Rotate(-12, 1, 0.3, 0.2)
+
+ri.Rotate(-90, 1, 0, 0)
+# create shape
+buoy_width = 0.35
+ri.Cylinder(0.5*buoy_width, -1, 1, 360)
+
+ri.Translate(0,0,1)
+ri.Scale(1,1,0.5)
+ri.Sphere(0.5*buoy_width, -1,0.3,360)
+ri.Translate(0,0,0.3)
+ri.Scale(1,1,0.001)
+ri.Sphere(0.4*buoy_width, -1,1,360)
+ri.TransformEnd()
+
+
+
 ri.AttributeEnd()
 ri.TransformEnd()
-ri.Sphere(0.5, -1, 1, 360)
 
 ri.TransformBegin()
 ri.AttributeBegin()
