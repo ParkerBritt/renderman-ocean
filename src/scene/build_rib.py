@@ -28,7 +28,7 @@ ri.Pattern("water", "waterShader", {"float scale": [0.5], "float height":[0.05]}
 
 # displacement
 ri.Attribute("trace", {"int displacements": [1]})
-ri.Attribute("displacementbound", {"float sphere": [5], "string coordinatesystem": ["shader"]})
+ri.Attribute("displacementbound", {"float sphere": [10], "string coordinatesystem": ["shader"]})
 ri.Displace(
     "PxrDisplace", # shader
     "water_displace", # name

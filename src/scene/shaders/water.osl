@@ -60,7 +60,51 @@ shader water (
 
 
 
+    // big waves
+    for(int i=0; i<5; i++)
+    {
+        float bigWaveAngle = noise("hash", 9682) * 2.0 * M_PI;
+        float bigWaveStretch = 0.01;
+        vector bigWaveDir = vector(cos(bigWaveAngle)*bigWaveStretch,1, sin(bigWaveAngle)*bigWaveStretch);
+
+        int bigWaveNum = 3;
+        vector bigWaveMaskPos = P;
+        bigWaveMaskPos += noise("hash", 238+i)*100;
+        // change frequency of noise
+        bigWaveMaskPos*= 0.03;
+        float bigWaveMask = smoothstep(0, 1, clamp(fit(noise("perlin", bigWaveMaskPos), 0, 1, 0 ,1),0,1));
+        // bigWaveMask = 1;
+
+        float angleVariation = 0.1;
+        float angle = noise("hash", 10)+noise("hash", i)*angleVariation;
+        angle *= 2.0 * M_PI;
+        vector dir = vector(cos(angle),0, sin(angle));
+
+        float dirOffset = 20;
+        offset = noise("hash", 6072) * dirOffset;
+
+        float a = dot(P, dir);
+
+        baseWaveLength = 30;
+        baseAmp = 0.21;
+
+        for(int j = 0; j < bigWaveNum; ++j){
+            float waveLength = baseWaveLength / (j + 1) * fit(noise("hash", j+10),0,1,0.5,1.5);
+            float amplitude = baseAmp / (j + 1) * fit(noise("hash", j+5),0,1,0.2,2);
+            offset += noise("hash", j+826) * offset;
+
+
+            float k = 2 * M_PI / waveLength;
+            float theta = k * a + t + offset;
+
+            x = amplitude * sin(theta);
+            y -= amplitude * cos(theta)*bigWaveMask;
+            outDisplacement += x*dir;
+        }
+    }
     outDisplacement.y = y;
+
+
 
     outDiffuse=color(0,0.2,0.3);
 
