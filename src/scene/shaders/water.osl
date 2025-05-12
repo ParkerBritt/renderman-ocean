@@ -86,7 +86,7 @@ shader water (
         float a = dot(P, dir);
 
         baseWaveLength = 30;
-        baseAmp = 0.21;
+        baseAmp = 0.2;
 
         for(int j = 0; j < bigWaveNum; ++j){
             float waveLength = baseWaveLength / (j + 1) * fit(noise("hash", j+10),0,1,0.5,1.5);
@@ -106,7 +106,15 @@ shader water (
 
 
 
-    outDiffuse=color(0,0.2,0.3);
+    // outDiffuse=color(0.286, 0.353, 0.337);
+    float diffuseMixAlpha = fit(dot(N, vector(0,1,0)), -1, 1, -50, 1);
+    diffuseMixAlpha = clamp(diffuseMixAlpha, 0, 1);
+    color diffuseColorLow = color(0.286, 0.350, 0.237);
+    color diffuseColorHigh = color(0.596, 0.722, 0.784);
+    diffuseColorLow *= 0.3;
+    diffuseColorHigh *= 0.3;
+    // diffuseColorHigh = color(1,0,0);
+    outDiffuse = mix(diffuseColorLow, diffuseColorHigh, diffuseMixAlpha);
 
 
 

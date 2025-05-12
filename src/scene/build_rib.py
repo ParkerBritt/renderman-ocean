@@ -42,11 +42,18 @@ ri.Displace(
 ri.Attribute("visibility", {"int transmission": [1]})
 ri.Bxdf('PxrSurface', 'id',
 {
-	'color diffuseColor' : [0.05, 0.08, 0.12],
+	# 'color diffuseColor' : [0.286, 0.353, 0.337],
+    "reference color diffuseColor": ["waterShader:outDiffuse"],
 	'float diffuseGain' : [1.0],
 	'float diffuseRoughness' : [0.0],
+    'color specularIor' : [1.333 ,1.333 ,1.333 ], # doesn't make a visible difference
+
+	# 'float subsurfaceGain' : [0.5], 
+	# 'color subsurfaceColor' : [1,0,0], 
+ #    'float subsurfaceDmfp' : [0.1],
 
 	'color specularFaceColor' : [0.1, 0.11, 0.12],
+    # "reference color specularFaceColor": ["waterShader:outDiffuse"],
 	'float specularRoughness' : [0.05],
 
  #    'float refractionGain' : [1.0], 
@@ -56,7 +63,7 @@ ri.Bxdf('PxrSurface', 'id',
 
 ## shader end
 
-program = 'Procedural "RunProgram" ["bin/procedural" ""] [-5 5 -5 5 -5 5]\n'
+# program = 'Procedural "RunProgram" ["bin/procedural" ""] [-5 5 -5 5 -5 5]\n'
 # ri.ArchiveRecord(ri.VERBATIM, program)
 patch_size = 500
 ri.Patch("bilinear", {"P": [0.5*patch_size, 0.0, 0.5*patch_size, 0.5*patch_size, 0.0, -0.5*patch_size, -0.5*patch_size, 0.0, 0.5*patch_size, -0.5*patch_size, 0.0, -0.5*patch_size]})
