@@ -16,6 +16,14 @@ ri.Integrator("PxrPathTracer", "integrator")
 ri.Rotate(-10, 1, 0, 0)
 ri.Translate(0, -3, 10)
 # ri.Rotate(-90, 0, 1, 0)
+
+ri.DisplayChannel("float z")
+
+ri.Display("zdepth.exr", "openexr", "z", {
+    "string filter": "zmin",
+    "string data": "z"
+})
+
 ri.WorldBegin()
 
 ri.TransformBegin()
