@@ -2,4 +2,4 @@
 
 ./build.sh
 cd ./build
-prman out.rib
+prman out_*.rib

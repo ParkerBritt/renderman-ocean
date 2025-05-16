@@ -6,6 +6,8 @@ float fit(float value, float oldmin, float oldmax, float newmin, float newmax)
 shader water (
                 float scale=1,
                 float height=1,
+                int frame=1,
+                float speed=1,
                 output	color outDiffuse=0,
                 output vector outDisplacement= vector(0,1,0)
             )
@@ -14,8 +16,7 @@ shader water (
     int waveNum = 30;
     int waveDirNum = 20;
 
-    float c = 1;
-    float t = 0 * c;
+    float t = speed*frame;
 
 
     float x = 0;
