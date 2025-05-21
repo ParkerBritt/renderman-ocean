@@ -11,5 +11,5 @@ oslc src/scene/shaders/water.osl -o build/water.oso
 
 # scene
 cd src/scene
-./build_rib.py
+./build_rib.py "$@"
 

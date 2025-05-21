@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-./build.sh
+./build.sh "$@"
 cd ./build
 prman out_*.rib
