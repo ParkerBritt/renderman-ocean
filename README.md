@@ -7,7 +7,7 @@
 </div>
 
 This tool generates RIB (RenderMan Interface Bytestream) files and includes a custom OSL shader for rendering realistic ocean surfaces with the Renderman render engine.
-The waves are rendered using an osl displacement shader, using a custom implementation of multi-component [trochoidal](https://en.wikipedia.org/wiki/Trochoidal_wave) waves.
+The waves are rendered using an osl displacement shader, using a custom implementation of multi-component multi-directional [trochoidal](https://en.wikipedia.org/wiki/Trochoidal_wave) waves.
 
 
 https://github.com/user-attachments/assets/1be9d1be-0611-4e9c-a65a-5867930c4828
